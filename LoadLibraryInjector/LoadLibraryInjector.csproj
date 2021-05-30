@@ -47,6 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\Program.cs" />
+    <Compile Include="Native\AllocationType.cs" />
+    <Compile Include="Native\MemoryProtection.cs" />
+    <Compile Include="Native\ProcessAccessFlags.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Native\NativeWrapper.cs" />
   </ItemGroup>
