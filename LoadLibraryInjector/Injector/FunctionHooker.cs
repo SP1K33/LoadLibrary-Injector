@@ -34,7 +34,6 @@ namespace LoadLibraryInjector.Injector
 		};
 
 		/// <summary>
-		/// string -> Function name
 		/// byte[] -> Original function bytes
 		/// </summary>
 		private static readonly Dictionary<NativeFunction, byte[]> OriginalFunctionBytes = new Dictionary<NativeFunction, byte[]>();
