@@ -56,7 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\InjectionResult.cs" />
+    <Compile Include="Injector\InjectionResult.cs" />
     <Compile Include="App\Program.cs" />
     <Compile Include="Injector\FunctionHooker.cs" />
     <Compile Include="Injector\LoadLibraryInjector.cs" />
