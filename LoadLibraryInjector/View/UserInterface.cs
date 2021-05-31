@@ -66,5 +66,10 @@ namespace LoadLibraryInjector.View
 		{
 			MessageBox.Show(@"Dll path or process is invalid", @"LoadLibrary Injector", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
+
+		public static void ShowElevatedError()
+		{
+			MessageBox.Show(@"Run as administrator", @"LoadLibrary Injector", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
 	}
 }

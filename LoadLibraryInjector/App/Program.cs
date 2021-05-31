@@ -35,7 +35,10 @@ namespace LoadLibraryInjector.App
 		internal static void Main()
 		{
 			if (!IsElevated)
+			{
+				UserInterface.ShowElevatedError();
 				return;
+			}
 
 			var data = UserInterface.GetUserInterfaceData(Process.GetProcesses());
 
