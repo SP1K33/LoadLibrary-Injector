@@ -1,6 +1,6 @@
 ﻿namespace LoadLibraryInjector.Injector
 {
-	public class NativeFunction
+	public readonly struct NativeFunction
 	{
 		public string FunctionName { get; }
 		public string DllName { get; }
