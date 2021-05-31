@@ -2,7 +2,7 @@
 {
 	public enum InjectionResult : uint
 	{
-		Access = 0,
+		Success = 0,
 		ProcessNotFound,
 		OpenProcessError,
 		HookFunctionsFail,

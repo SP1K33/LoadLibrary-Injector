@@ -37,13 +37,13 @@ namespace LoadLibraryInjector.Injector
 		/// string -> Function name
 		/// byte[] -> Original function bytes
 		/// </summary>
-		private static readonly Dictionary<string, byte[]> OriginalFunctionBytes = new Dictionary<string, byte[]>();
+		private static readonly Dictionary<NativeFunction, byte[]> OriginalFunctionBytes = new Dictionary<NativeFunction, byte[]>();
 
 		public static bool HookFunctions(IntPtr processHandle)
 		{
 			foreach (var function in NativeFunctions)
 			{
-				if (!HookFunction(processHandle, function.MethodName, function.DllName))
+				if (!HookFunction(processHandle, function))
 					return false;
 			}
 
@@ -54,16 +54,16 @@ namespace LoadLibraryInjector.Injector
 		{
 			foreach (var function in NativeFunctions)
 			{
-				if (!RestoreHook(processHandle, function.MethodName, function.DllName))
+				if (!RestoreHook(processHandle, function))
 					return false;
 			}
 
 			return true;
 		}
 
-		private static bool HookFunction(IntPtr processHandle, string functionName, string dllName)
+		private static bool HookFunction(IntPtr processHandle, NativeFunction function)
 		{
-			var originalFunctionAddress = NativeWrapper.GetProcAddress(NativeWrapper.LoadLibrary(dllName), functionName);
+			var originalFunctionAddress = NativeWrapper.GetProcAddress(NativeWrapper.LoadLibrary(function.DllName), function.FunctionName);
 
 			if (originalFunctionAddress == IntPtr.Zero)
 				return false;
@@ -73,7 +73,7 @@ namespace LoadLibraryInjector.Injector
 			if (!NativeWrapper.ReadProcessMemory(processHandle, originalFunctionAddress, originalFunctionBytes, sizeof(byte) * 6, out _))
 				return false;
 
-			OriginalFunctionBytes.Add(functionName, originalFunctionBytes);
+			OriginalFunctionBytes.Add(function, originalFunctionBytes);
 
 			byte[] originalDllBytes = new byte[6];
 
@@ -85,14 +85,14 @@ namespace LoadLibraryInjector.Injector
 			return NativeWrapper.WriteProcessMemory(processHandle, originalFunctionAddress, originalDllBytes, sizeof(byte) * 6, out _);
 		}
 
-		private static bool RestoreHook(IntPtr processHandle, string functionName, string dllName)
+		private static bool RestoreHook(IntPtr processHandle, NativeFunction function)
 		{
-			IntPtr originalFunctionAddress = NativeWrapper.GetProcAddress(NativeWrapper.LoadLibrary(dllName), functionName);
+			IntPtr originalFunctionAddress = NativeWrapper.GetProcAddress(NativeWrapper.LoadLibrary(function.DllName), function.FunctionName);
 
 			if (originalFunctionAddress == IntPtr.Zero)
 				return false;
 
-			return NativeWrapper.WriteProcessMemory(processHandle, originalFunctionAddress, OriginalFunctionBytes[functionName], sizeof(byte) * 6, out _);
+			return NativeWrapper.WriteProcessMemory(processHandle, originalFunctionAddress, OriginalFunctionBytes[function], sizeof(byte) * 6, out _);
 		}
 
 	}

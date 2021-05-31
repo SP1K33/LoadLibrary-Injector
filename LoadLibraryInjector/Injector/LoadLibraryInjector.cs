@@ -7,14 +7,8 @@ namespace LoadLibraryInjector.Injector
 {
 	public static class LoadLibraryInjector
 	{
-		public static InjectionResult Inject(string windowName, string dllPath)
+		public static InjectionResult Inject(IntPtr processHandle, string dllPath)
 		{
-			if (!GetProcessId(windowName, out var processId))
-				return InjectionResult.ProcessNotFound;
-
-			if (!GetProcessHandle(processId, out var processHandle))
-				return InjectionResult.OpenProcessError;
-
 			if (!FunctionHooker.HookFunctions(processHandle))
 				return InjectionResult.HookFunctionsFail;
 
@@ -35,34 +29,7 @@ namespace LoadLibraryInjector.Injector
 
 			NativeWrapper.CloseHandle(processHandle);
 
-			return InjectionResult.Access;
-		}
-
-		private static bool GetProcessHandle(uint processId, out IntPtr processHandle)
-		{
-			processHandle = NativeWrapper.OpenProcess(ProcessAccessFlags.All, false, (int)processId);
-
-			if (processHandle == IntPtr.Zero)
-				return false;
-
-			return true;
-		}
-
-		private static bool GetProcessId(string windowName, out uint processId)
-		{
-			processId = UInt32.MinValue;
-
-			var windowHandle = NativeWrapper.FindWindow(null, windowName);
-
-			if (windowHandle == IntPtr.Zero)
-				return false;
-
-			NativeWrapper.GetWindowThreadProcessId(windowHandle, out processId);
-
-			if (processId == UInt32.MinValue)
-				return false;
-
-			return true;
+			return InjectionResult.Success;
 		}
 
 		private static bool AllocateLibrarySize(IntPtr processHandle, IntPtr size, out IntPtr address)

@@ -2,12 +2,12 @@
 {
 	public class NativeFunction
 	{
-		public string MethodName { get; }
+		public string FunctionName { get; }
 		public string DllName { get; }
 
-		public NativeFunction(string methodName, string dllName)
+		public NativeFunction(string functionName, string dllName)
 		{
-			MethodName = methodName;
+			FunctionName = functionName;
 			DllName = dllName;
 		}
 	}
