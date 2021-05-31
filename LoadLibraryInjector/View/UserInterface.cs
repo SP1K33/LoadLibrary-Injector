@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
+using LoadLibraryInjector.Injector;
 
 namespace LoadLibraryInjector.View
 {

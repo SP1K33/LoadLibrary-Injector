@@ -1,4 +1,4 @@
-﻿namespace LoadLibraryInjector.App
+﻿namespace LoadLibraryInjector.Injector
 {
 	public enum InjectionResult : uint
 	{
