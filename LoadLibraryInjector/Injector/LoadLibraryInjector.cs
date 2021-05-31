@@ -35,21 +35,13 @@ namespace LoadLibraryInjector.Injector
 		private static bool AllocateLibrarySize(IntPtr processHandle, IntPtr size, out IntPtr address)
 		{
 			address = NativeWrapper.VirtualAllocEx(processHandle, IntPtr.Zero, size, AllocationType.Reserve | AllocationType.Commit, MemoryProtection.ExecuteReadWrite);
-
-			if (address == IntPtr.Zero)
-				return false;
-
-			return true;
+			return address != IntPtr.Zero;
 		}
 
 		private static bool SetLoadLibraryPath(IntPtr processHandle, string dllPath, IntPtr allocatedAddress)
 		{
 			byte[] bytes = Encoding.ASCII.GetBytes(dllPath);
-
-			if (!NativeWrapper.WriteProcessMemory(processHandle, allocatedAddress, bytes, (int)bytes.Length, out _))
-				return false;
-
-			return true;
+			return NativeWrapper.WriteProcessMemory(processHandle, allocatedAddress, bytes, (int)bytes.Length, out _);
 		}
 
 		private static bool GetLoadLibraryAddress(out IntPtr loadLibraryAddress)
@@ -63,10 +55,7 @@ namespace LoadLibraryInjector.Injector
 
 			loadLibraryAddress = NativeWrapper.GetProcAddress(kernel32Handle, "LoadLibraryA");
 
-			if (loadLibraryAddress == IntPtr.Zero)
-				return false;
-
-			return true;
+			return loadLibraryAddress != IntPtr.Zero;
 		}
 
 		private static bool CallRemoteLoadLibrary(IntPtr processHandle, IntPtr loadLibraryAddress, IntPtr allocatedProcessAddress)

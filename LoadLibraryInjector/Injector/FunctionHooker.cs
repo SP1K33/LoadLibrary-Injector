@@ -33,9 +33,6 @@ namespace LoadLibraryInjector.Injector
 			new NativeFunction("ResumeThread", "KernelBase")
 		};
 
-		/// <summary>
-		/// byte[] -> Original function bytes
-		/// </summary>
 		private static readonly Dictionary<NativeFunction, byte[]> OriginalFunctionBytes = new Dictionary<NativeFunction, byte[]>();
 
 		public static bool HookFunctions(IntPtr processHandle)

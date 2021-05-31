@@ -17,7 +17,7 @@ namespace LoadLibraryInjector.Utils
 
 				try
 				{
-					if (IsX86BitProcess(process))
+					if (process.IsX86BitProcess())
 					{
 						result.Add(process);
 					}
