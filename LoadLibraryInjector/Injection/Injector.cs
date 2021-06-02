@@ -1,11 +1,10 @@
-﻿using LoadLibraryInjector.App;
-using LoadLibraryInjector.Native;
-using System;
+﻿using System;
 using System.Text;
+using LoadLibraryInjector.Native;
 
-namespace LoadLibraryInjector.Injector
+namespace LoadLibraryInjector.Injection
 {
-	public static class LoadLibraryInjector
+	public static class Injector
 	{
 		public static InjectionResult Inject(IntPtr processHandle, string dllPath)
 		{

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using LoadLibraryInjector.Native;
 
-namespace LoadLibraryInjector.Injector
+namespace LoadLibraryInjector.Injection
 {
 	public static class FunctionHooker
 	{

@@ -2,15 +2,17 @@
 using LoadLibraryInjector.Utils;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Windows.Forms;
-using LoadLibraryInjector.Injector;
+using LoadLibraryInjector.Injection;
+using LoadLibraryInjector.Native;
 
 namespace LoadLibraryInjector.View
 {
 	public static class UserInterface
 	{
-		public static UserInterfaceData GetUserInterfaceData(IEnumerable<Process> processes)
+		public static UserInterfaceData GetUserInterfaceData(IList<ProcessEntry32> entries)
 		{
 			Application.EnableVisualStyles();
 
@@ -18,23 +20,20 @@ namespace LoadLibraryInjector.View
 			{
 				string dllPath = GetDllPath();
 
-				var x86Processes = ProcessUtils.GetX86Processes(processes);
-
-				foreach (var process in x86Processes)
+				foreach (var entry in entries)
 				{
-					string fileName = $"{process.MainModule.ModuleName} ({process.Id})";
+					string fileName = $"{entry.szExeFile} ({entry.th32ProcessID})";
 					form.AddProcessListItem(fileName);
 				}
 
-				IntPtr processHandle = IntPtr.Zero;
+				ProcessEntry32 processEntry = default;
 
 				if (form.ShowDialog() == DialogResult.OK)
 				{
-					var selectedProcess = x86Processes[form.GetSelectedProcessIndex()];
-					processHandle = selectedProcess.Handle;
+					processEntry = entries[form.GetSelectedProcessIndex()];
 				}
 
-				return new UserInterfaceData(dllPath, processHandle);
+				return new UserInterfaceData(dllPath, processEntry);
 			}
 		}
 

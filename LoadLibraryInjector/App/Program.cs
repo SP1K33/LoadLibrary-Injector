@@ -20,10 +20,12 @@
 
 */
 
+using LoadLibraryInjector.Utils;
 using LoadLibraryInjector.View;
 using System;
 using System.Diagnostics;
 using System.Security.Principal;
+using LoadLibraryInjector.Injection;
 
 namespace LoadLibraryInjector.App
 {
@@ -40,7 +42,9 @@ namespace LoadLibraryInjector.App
 				return;
 			}
 
-			var data = UserInterface.GetUserInterfaceData(Process.GetProcesses());
+			var processes = ProcessUtils.GetX86Processes();
+			var sortedEntries = ProcessUtils.SortEntries(processes);
+			var data = UserInterface.GetUserInterfaceData(sortedEntries);
 
 			if (!data.IsValid)
 			{
@@ -48,7 +52,7 @@ namespace LoadLibraryInjector.App
 			}
 			else
 			{
-				var injectionResult = Injector.LoadLibraryInjector.Inject(data.ProcessHandle, data.DllPath);
+				var injectionResult = Injector.Inject(processes[data.ProcessEntry], data.DllPath);
 				UserInterface.ShowInjectionResult(injectionResult);
 			}
 

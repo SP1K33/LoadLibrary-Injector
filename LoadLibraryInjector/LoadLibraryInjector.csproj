@@ -56,14 +56,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Injector\InjectionResult.cs" />
+    <Compile Include="Injection\InjectionResult.cs" />
     <Compile Include="App\Program.cs" />
-    <Compile Include="Injector\FunctionHooker.cs" />
-    <Compile Include="Injector\LoadLibraryInjector.cs" />
-    <Compile Include="Injector\NativeFunction.cs" />
+    <Compile Include="Injection\FunctionHooker.cs" />
+    <Compile Include="Injection\Injector.cs" />
+    <Compile Include="Injection\NativeFunction.cs" />
     <Compile Include="Native\AllocationType.cs" />
     <Compile Include="Native\MemoryProtection.cs" />
     <Compile Include="Native\ProcessAccessFlags.cs" />
+    <Compile Include="Native\ProcessEntry32.cs" />
+    <Compile Include="Native\SnapshotFlags.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Native\NativeWrapper.cs" />
     <Compile Include="Utils\ProcessUtils.cs" />

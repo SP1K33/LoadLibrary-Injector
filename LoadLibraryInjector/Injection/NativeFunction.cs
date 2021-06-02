@@ -1,4 +1,4 @@
-﻿namespace LoadLibraryInjector.Injector
+﻿namespace LoadLibraryInjector.Injection
 {
 	public readonly struct NativeFunction
 	{

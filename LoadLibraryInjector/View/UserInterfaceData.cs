@@ -1,18 +1,18 @@
-﻿using System;
+﻿using LoadLibraryInjector.Native;
 
 namespace LoadLibraryInjector.View
 {
 	public readonly struct UserInterfaceData
 	{
-		public UserInterfaceData(string dllPath, IntPtr processHandle)
+		public UserInterfaceData(string dllPath, ProcessEntry32 processEntry)
 		{
 			DllPath = dllPath;
-			ProcessHandle = processHandle;
+			ProcessEntry = processEntry;
 		}
 
-		public IntPtr ProcessHandle { get; }
+		public ProcessEntry32 ProcessEntry { get; }
 		public string DllPath { get; }
 
-		public bool IsValid => ProcessHandle != IntPtr.Zero && !string.IsNullOrEmpty(DllPath);
+		public bool IsValid => !string.IsNullOrEmpty(ProcessEntry.szExeFile) && !string.IsNullOrEmpty(DllPath);
 	}
 }
