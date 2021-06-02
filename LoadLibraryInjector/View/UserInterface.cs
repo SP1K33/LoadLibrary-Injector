@@ -1,12 +1,8 @@
-﻿using LoadLibraryInjector.App;
-using LoadLibraryInjector.Utils;
+﻿using LoadLibraryInjector.Injection;
+using LoadLibraryInjector.Native;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Diagnostics;
 using System.Windows.Forms;
-using LoadLibraryInjector.Injection;
-using LoadLibraryInjector.Native;
 
 namespace LoadLibraryInjector.View
 {

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using LoadLibraryInjector.Native;
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using LoadLibraryInjector.Native;
 
 namespace LoadLibraryInjector.Injection
 {

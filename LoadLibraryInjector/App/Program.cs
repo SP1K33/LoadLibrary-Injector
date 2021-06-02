@@ -23,7 +23,6 @@
 using LoadLibraryInjector.Utils;
 using LoadLibraryInjector.View;
 using System;
-using System.Diagnostics;
 using System.Security.Principal;
 using LoadLibraryInjector.Injection;
 

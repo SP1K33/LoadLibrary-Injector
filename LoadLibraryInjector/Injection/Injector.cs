@@ -1,6 +1,6 @@
-﻿using System;
+﻿using LoadLibraryInjector.Native;
+using System;
 using System.Text;
-using LoadLibraryInjector.Native;
 
 namespace LoadLibraryInjector.Injection
 {
